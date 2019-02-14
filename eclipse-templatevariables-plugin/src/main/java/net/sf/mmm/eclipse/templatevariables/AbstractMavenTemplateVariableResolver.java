@@ -65,13 +65,26 @@ public abstract class AbstractMavenTemplateVariableResolver extends TemplateVari
    */
   protected abstract String getMavenProperty(IMavenProjectFacade projectFacade);
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected String resolve(TemplateContext context) {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected String resolve(final TemplateContext context) {
+        // Eclipse 4.10
+        if (IAdaptable.class.isInstance(context)) {
+            return this.getMavenProperty(context.getAdapter(IProject.class));
+        }
 
-        return this.getMavenProperty(context.getAdapter(IProject.class));
+        // Workaround for Eclipse versions <4.10
+        try {
+            final Method method = context.getClass().getMethod("getJavaProject");
+            final Object result = method.invoke(context);
+            final IJavaProject javaProject = (IJavaProject)result;
+            return this.getMavenProperty(javaProject.getProject());
+        } catch (final NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException
+                | InvocationTargetException e) {
+            throw new IllegalStateException(e);
+        }
     }
 
 }
