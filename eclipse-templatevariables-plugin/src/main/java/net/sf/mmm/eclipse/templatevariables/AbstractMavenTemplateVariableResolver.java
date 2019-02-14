@@ -5,7 +5,6 @@ package net.sf.mmm.eclipse.templatevariables;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.jdt.internal.corext.template.java.CodeTemplateContext;
 import org.eclipse.jface.text.templates.TemplateContext;
 import org.eclipse.jface.text.templates.TemplateVariableResolver;
 import org.eclipse.m2e.core.MavenPlugin;
@@ -72,7 +71,7 @@ public abstract class AbstractMavenTemplateVariableResolver extends TemplateVari
   @Override
   protected String resolve(TemplateContext context) {
 
-    return getMavenProperty(((CodeTemplateContext) context).getJavaProject().getProject());
-  }
+        return this.getMavenProperty(context.getAdapter(IProject.class));
+    }
 
 }
