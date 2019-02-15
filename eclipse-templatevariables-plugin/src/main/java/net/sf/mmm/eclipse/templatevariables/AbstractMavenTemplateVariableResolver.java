@@ -2,9 +2,13 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package net.sf.mmm.eclipse.templatevariables;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jface.text.templates.TemplateContext;
 import org.eclipse.jface.text.templates.TemplateVariableResolver;
 import org.eclipse.m2e.core.MavenPlugin;
@@ -14,7 +18,7 @@ import org.eclipse.m2e.core.project.IMavenProjectRegistry;
 /**
  * This is the abstract base class for a {@link TemplateVariableResolver} that reads a property from a maven
  * project.
- * 
+ *
  * @author Andreas Hoehmann (hoehmann)
  * @author Joerg Hohwiller (hohwille at users.sourceforge.net)
  */
@@ -23,7 +27,7 @@ public abstract class AbstractMavenTemplateVariableResolver extends TemplateVari
 
   /**
    * The constructor.
-   * 
+   *
    * @param type is the type
    * @param description
    */
@@ -34,7 +38,7 @@ public abstract class AbstractMavenTemplateVariableResolver extends TemplateVari
 
   /**
    * Get the current maven project version.
-   * 
+   *
    * @param project is the {@link IProject}.
    * @return the maven project version excluding a potential "-SNAPSHOT" suffix.
    */
