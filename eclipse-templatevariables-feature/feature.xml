@@ -226,7 +226,7 @@
          id="net.sf.mmm.eclipse.templatevariables.plugin"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.1.0.qualifier"
          unpack="false"/>
 
 </feature>
