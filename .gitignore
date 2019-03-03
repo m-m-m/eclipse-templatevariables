@@ -1,2 +1,14 @@
-/.project
-/.settings/
+.*
+
+*.class
+*.jar
+*.war
+*.ear
+*.log
+*.iml
+hs_err_pid*
+
+target
+eclipse-target
+bin
+log
